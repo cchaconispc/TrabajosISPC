@@ -1,0 +1,58 @@
+# Tu tarea es implementar la clase Queue con dos operaciones básicas:
+# put(elemento), que coloca un elemento al final de la cola.
+# get(), que toma un elemento del principio de la cola y lo devuelve como resultado(la cola no puede estar vacía para realizarlo correctamente).
+# Sigue las sugerencias:
+#
+# Emplea una lista como tu almacenamiento(como lo hicimos con la pila).
+# put() debe agregar elementos al principio de la lista, mientras que get() debe eliminar los elementos del final de la lista.
+# Define una nueva excepción llamada QueueError(elige una excepción de la cual se derivará) y generala cuando get() intentes operar en una lista vacía.
+#Completa el código que te proporcionamos en el editor. Ejecútalo para comprobar si tu salida es similar a la nuestra.
+
+
+
+
+
+from cmath import e
+from xml.dom.expatbuilder import parseString
+
+
+class QueueError(Exception):  # Eligir la clase base para la nueva excepción.
+      pass
+
+class Error_de_cola(QueueError):
+      def __init__(self, operando):
+          self.mje_error= operando
+
+      def retorno (self):
+          return "Es un error esto" + self.mje_error
+           
+
+class Queue:
+    def __init__(self):
+        self.__pila = []
+        self.__errado = QueueError
+        
+
+    def put(self, elem):
+        self.__pila.insert(0,elem)
+        print(self.__pila)
+
+    def get(self):
+        
+        if len(self.__pila) == 0:  raise Error_de_cola("Cola Vacia")
+        elem = self.__pila[-1]
+        del self.__pila[-1]
+        return elem
+
+que = Queue()
+que.put(1)
+que.put("perro")
+que.put(False)
+
+try:
+    for i in range(4):
+        print(que.get())
+except IndexError:
+    print ("Otro Error")
+except Error_de_cola as e:
+    print(e.retorno())
